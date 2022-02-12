@@ -26,7 +26,7 @@ if(NOT LIBTCC_FOUND)
 	endif()
 endif()
 
-find_package(LibClang)
+find_package(LibClang 13)
 
 if(NOT LibClang_FOUND)
 	message(STATUS "Clang C API library not found")
