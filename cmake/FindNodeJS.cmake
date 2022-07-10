@@ -470,6 +470,7 @@ if(NOT NodeJS_LIBRARY)
 			# Workaround for OpenSSL bug: https://github.com/metacall/core/issues/223
 			if(APPLE)
 				set(ICU_ENV_VAR ${CMAKE_COMMAND} -E env PYTHONHTTPSVERIFY=0)
+				set(PREFIX ${CMAKE_BINARY_DIR})
 			else()
 				set(ICU_ENV_VAR)
 			endif()
