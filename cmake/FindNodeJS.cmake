@@ -469,14 +469,19 @@ if(NOT NodeJS_LIBRARY)
 
 			# Workaround for OpenSSL bug: https://github.com/metacall/core/issues/223
 			if(APPLE)
-				set(PREFIX_ENV_VAR ${CMAKE_COMMAND} -E env PREFIX=${CMAKE_BINARY_DIR})
 				set(ICU_ENV_VAR ${CMAKE_COMMAND} -E env PYTHONHTTPSVERIFY=0)
 			else()
 				set(ICU_ENV_VAR)
 			endif()
 
-			execute_process(COMMAND ${ICU_ENV_VAR} sh -c "./configure --with-icu-source=${ICU_URL} --shared ${ICU_DEBUG}" WORKING_DIRECTORY "${NodeJS_OUTPUT_PATH}")
+			# NodeJS Homebrew Workaround for Apple install 
+            if(APPLE)
+                set(INSTALL_PREFIX --prefix=${CMAKE_CURRENT_BINARY_DIR})
+            else()
+                set(INSTALL_PREFIX)
+            endif()
 
+			execute_process(COMMAND ${ICU_ENV_VAR} sh -c "./configure --with-icu-source=${ICU_URL} --shared ${ICU_DEBUG}" WORKING_DIRECTORY "${NodeJS_OUTPUT_PATH}")
 			message(STATUS "Build NodeJS shared library")
 
 			include(ProcessorCount)
