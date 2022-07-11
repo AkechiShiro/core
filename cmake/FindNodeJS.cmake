@@ -481,7 +481,8 @@ if(NOT NodeJS_LIBRARY)
                 set(INSTALL_PREFIX)
             endif()
 
-			execute_process(COMMAND ${ICU_ENV_VAR} sh -c "./configure --with-icu-source=${ICU_URL} --shared ${ICU_DEBUG}" WORKING_DIRECTORY "${NodeJS_OUTPUT_PATH}")
+			execute_process(COMMAND ${ICU_ENV_VAR} sh -c "./configure --with-icu-source=${ICU_URL} --shared ${ICU_DEBUG} ${INSTALL_PREFIX}" WORKING_DIRECTORY "${NodeJS_OUTPUT_PATH}")
+
 			message(STATUS "Build NodeJS shared library")
 
 			include(ProcessorCount)
